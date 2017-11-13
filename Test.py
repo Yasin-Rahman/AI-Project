@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[5]:
 
 #import python modules
 from __future__ import absolute_import
@@ -67,7 +67,7 @@ def run():
 #Giving two new inputs to check
   new_Data = np.array(
       [[500, 100, 300, 2],
-       [15, 5, 0, 0]], dtype=np.float32)
+       [15, 5, 0, 0]], dtype=np.int32)
   predict_input_fn = tf.estimator.inputs.numpy_input_fn(
       x={"x": new_Data},
       num_epochs=1,
