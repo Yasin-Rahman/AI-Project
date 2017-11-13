@@ -27,8 +27,8 @@ def run():
       filename=Training,
       target_dtype=np.int,
       features_dtype=np.int32)
+
 #Loading testing set
-    
   test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
       filename=Testing,
       target_dtype=np.int,
@@ -50,7 +50,7 @@ def run():
       shuffle=True)
 
 #Training prediction model.
-  classifier.train(input_fn=train_input_fn, steps=1000)
+  classifier.train(input_fn=train_input_fn, steps=10000)
 
 #Getting input from testing set with numpy array
   test_input_fn = tf.estimator.inputs.numpy_input_fn(
@@ -65,21 +65,18 @@ def run():
   print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 
 #Giving two new inputs to check
-  new_samples = np.array(
-      [[500, 1000, 3, 2],
-       [5, 5, 0, 0]], dtype=np.float32)
+  new_Data = np.array(
+      [[500, 100, 300, 2],
+       [15, 5, 0, 0]], dtype=np.float32)
   predict_input_fn = tf.estimator.inputs.numpy_input_fn(
-      x={"x": new_samples},
+      x={"x": new_Data},
       num_epochs=1,
       shuffle=False)
 
   predictions = list(classifier.predict(input_fn=predict_input_fn))
   predicted_classes = [p["classes"] for p in predictions]
 
-  print(
-      "New Data, Predictions:    {}\n"
-      .format(predicted_classes))
-
+  print("Predicted Class:    {}\n".format(predicted_classes))
 
 if __name__ == "__main__":
     run()
